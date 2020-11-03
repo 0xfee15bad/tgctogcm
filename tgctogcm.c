@@ -1,6 +1,7 @@
 // tgctogcm.c -- Plootid 2004
 
 #include <stdlib.h>
+#include <stdint.h>
 #include <stdio.h>
 
 #if defined(__linux__) || defined(__unix__)
@@ -12,8 +13,8 @@
 int main(int argc, char **argv)
 {
     FILE        *tgcin, *gcmout;
-    unsigned long   tgcheader[14];
-    unsigned long   temp[3];
+    uint32_t    tgcheader[14];
+    uint32_t    temp[3];
     int         i;
 
     if (argc < 2)
@@ -28,9 +29,9 @@ int main(int argc, char **argv)
         return EXIT_FAILURE;
     }
 
-    fread(tgcheader, 4, 14, tgcin);
+    fread(tgcheader, sizeof(tgcheader[0]), (sizeof(tgcheader) / sizeof(tgcheader[0])), tgcin);
 
-    for (i = 0; i < 14; i++)
+    for (i = 0; i < (int)(sizeof(tgcheader) / (sizeof(tgcheader[0]))); i++)
     {
         tgcheader[i] = ntohl(tgcheader[i]); //Byte-swap
     }
