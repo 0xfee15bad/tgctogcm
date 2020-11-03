@@ -2,7 +2,12 @@
 
 #include <stdlib.h>
 #include <stdio.h>
-//#include <winsock.h>
+
+#if defined(__linux__) || defined(__unix__)
+#include <arpa/inet.h>
+#elif defined(_WIN32)
+#include <winsock.h>
+#endif
 
 int main(int argc, char **argv)
 {
