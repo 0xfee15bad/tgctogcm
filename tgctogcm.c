@@ -1,5 +1,6 @@
 // tgctogcm.c -- Plootid 2004
 
+#include <stdlib.h>
 #include <stdio.h>
 //#include <winsock.h>
 
@@ -13,13 +14,13 @@ int main(int argc, char **argv)
     if (argc < 2)
     {
         printf("Usage: %s <infile.tgc> <outfile.gcm>\n", argv[0]);
-        return 1;
+        return EXIT_FAILURE;
     }
 
     if (!(tgcin = fopen(argv[1], "rb")))
     {
         printf("Error: Couldn't open file %s\n", argv[1]);
-        return 1;
+        return EXIT_FAILURE;
     }
 
     fread(tgcheader, 4, 14, tgcin);
@@ -37,14 +38,14 @@ int main(int argc, char **argv)
     {
         printf("Error: Input file does not appear to be a .tgc file\n");
         fclose(tgcin);
-        return 1;
+        return EXIT_FAILURE;
     }
 
     if (!(gcmout = fopen(argv[2], "w+b")))
     {
         printf("Error: Couldn't open file %s\n", argv[2]);
         fclose(tgcin);
-        return 1;
+        return EXIT_FAILURE;
     }
 
     printf("TGCtoGCM by Plootid 2004\n\n");
@@ -83,5 +84,5 @@ int main(int argc, char **argv)
     }
     fclose(gcmout);
     printf("All Done!\n");
-    return 0;
+    return EXIT_SUCCESS;
 }
