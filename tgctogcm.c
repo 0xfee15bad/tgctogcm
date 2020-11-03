@@ -17,7 +17,7 @@ int main(int argc, char **argv)
         return EXIT_FAILURE;
     }
 
-    if (!(tgcin = fopen(argv[1], "rb")))
+    if ((tgcin = fopen(argv[1], "rb")) == NULL)
     {
         printf("Error: Couldn't open file %s\n", argv[1]);
         return EXIT_FAILURE;
